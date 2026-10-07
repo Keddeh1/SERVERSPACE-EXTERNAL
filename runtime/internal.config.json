@@ -1,0 +1,26 @@
+{
+  "family": "internal",
+  "repository": "Keddeh1/SERVERSPACE",
+  "branch": "codex",
+  "environment": "development",
+  "public_facing": false,
+  "dns": {
+    "zones_root": "runtime/dns/internal",
+    "resolver_endpoint": "resolver-internal.html",
+    "allow_external": false
+  },
+  "web": {
+    "site_root": "sites/keddeh.com/internal",
+    "port": 8080,
+    "tls_enabled": false
+  },
+  "services": [
+    "keddeh.com_internal_staging",
+    "dns_resolver_internal",
+    "development_api"
+  ],
+  "logging": {
+    "level": "debug",
+    "output": "runtime/logs/internal.log"
+  }
+}

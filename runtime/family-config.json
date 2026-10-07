@@ -1,0 +1,43 @@
+{
+  "runtime_name": "KEDDEH_UNIFIED_BUNDLE",
+  "version": "1.0.0",
+  "bundle_mode": "dual_family_single_runtime",
+  "families": {
+    "internal": {
+      "repository": "Keddeh1/SERVERSPACE",
+      "branch": "codex",
+      "environment": "development",
+      "public_facing": false,
+      "dns_root": "runtime/dns/internal",
+      "site_root": "sites/keddeh.com/internal",
+      "resolver_endpoint": "resolver-internal.html"
+    },
+    "external": {
+      "repository": "Keddeh1/SERVERSPACE-EXTERNAL",
+      "branch": "production",
+      "environment": "production",
+      "public_facing": true,
+      "dns_root": "runtime/dns/external",
+      "site_root": "sites/keddeh.com/public",
+      "resolver_endpoint": "resolver-external.html"
+    }
+  },
+  "sync_model": {
+    "direction": "internal_to_external",
+    "trigger": "codex_to_production",
+    "atomic": true,
+    "validation": "required_before_sync"
+  },
+  "shared_core": {
+    "runtime_core": "runtime/core",
+    "bootstrap_script": "runtime/bootstrap.sh",
+    "service_definitions": "runtime/services",
+    "package_registry": "packages/html"
+  },
+  "deployment": {
+    "internal_command": "env FAMILY=internal ./runtime/bootstrap.sh",
+    "external_command": "env FAMILY=external ./runtime/bootstrap.sh",
+    "isolation": "complete",
+    "concurrent_execution": true
+  }
+}

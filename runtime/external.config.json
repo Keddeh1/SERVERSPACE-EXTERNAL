@@ -1,0 +1,36 @@
+{
+  "family": "external",
+  "inherits_from": "internal",
+  "repository": "Keddeh1/SERVERSPACE-EXTERNAL",
+  "branch": "production",
+  "environment": "production",
+  "public_facing": true,
+  "dns": {
+    "zones_root": "runtime/dns/external",
+    "resolver_endpoint": "resolver-external.html",
+    "primary_domain": "keddeh.com",
+    "allow_external": true,
+    "tls_enabled": true
+  },
+  "web": {
+    "site_root": "sites/keddeh.com/public",
+    "port": 443,
+    "tls_cert_path": "runtime/certs/keddeh.com.crt",
+    "tls_key_path": "runtime/certs/keddeh.com.key"
+  },
+  "services": [
+    "keddeh.com_public_web",
+    "dns_resolver_external",
+    "api_gateway"
+  ],
+  "logging": {
+    "level": "info",
+    "output": "runtime/logs/external.log"
+  },
+  "sync": {
+    "source_repo": "Keddeh1/SERVERSPACE",
+    "source_branch": "codex",
+    "pull_interval_seconds": 3600,
+    "on_update": "validate_then_restart_services"
+  }
+}
